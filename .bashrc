@@ -32,6 +32,11 @@ alias gs='git status -sb' # Succinct git status
 alias gb="git rev-parse --abbrev-ref HEAD | tr -d '\n' | pbcopy" # Copy name of current branch to clipboard (macosx)
 alias gclean="git branch --merged | egrep -v \"(^\*|master|dev|TEMPLATE)\" | xargs git branch -d" # Clean local merged branches
 
+# Safety
+# alias rm="rm -i"
+alias mv='mv -i'
+alias cp='cp -i'
+
 # Bash history stuff
 export HISTCONTROL=ignoreboth
 export HISTFILESIZE=10000000
