@@ -63,7 +63,9 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 function parse_git_dirty {
   [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
 }
-function parse_git_branch () { git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/' }
+function parse_git_branch () {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
 RED="\[\033[0;31m\]"
 YELLOW="\[\033[0;33m\]"
 GREEN="\[\033[0;32m\]"
@@ -133,7 +135,3 @@ extract () {
 
 # From iTerm for remote shell integration
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-
-# Fuzzy finder
-export FZF_DEFAULT_OPTS='--height 60% --reverse --border'
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
