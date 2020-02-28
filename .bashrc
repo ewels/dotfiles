@@ -34,6 +34,9 @@ alias gb="git checkout -b " # Checkout a new branch
 alias gbranch="git checkout -b " # Checkout a new branch
 alias gclean="git branch --merged | egrep -v \"(^\*|master|dev|TEMPLATE)\" | xargs git branch -d" # Clean local merged branches
 
+# brew install git bash-completion
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+
 # Safety
 # alias rm="rm -i"
 alias mv='mv -i'
