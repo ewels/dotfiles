@@ -25,11 +25,13 @@ alias cat='bat --theme TwoDark' # Use the awesome `bat` instead of `cat`. Requir
 alias firefox='open -a /Applications/Firefox.app'
 alias chrome='open -a "/Applications/Google Chrome.app" '
 alias seqmonk='open -n -a seqmonk'
+alias typora='open -a typora'
 
 # Git shorthand
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 alias gs='git status -sb' # Succinct git status
-alias gb="git rev-parse --abbrev-ref HEAD | tr -d '\n' | pbcopy" # Copy name of current branch to clipboard (macosx)
+alias gb="git checkout -b " # Checkout a new branch
+alias gbranch="git checkout -b " # Checkout a new branch
 alias gclean="git branch --merged | egrep -v \"(^\*|master|dev|TEMPLATE)\" | xargs git branch -d" # Clean local merged branches
 
 # Safety
