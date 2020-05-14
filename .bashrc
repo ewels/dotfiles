@@ -26,6 +26,11 @@ alias firefox='open -a /Applications/Firefox.app'
 alias chrome='open -a "/Applications/Google Chrome.app" '
 alias seqmonk='open -n -a seqmonk'
 alias typora='open -a typora'
+alias cd..='cd ../'
+alias ..='cd ../'
+alias ...='cd ../../'
+alias ....='cd ../../../'
+mkcd (){ mkdir -p -- "$1" && cd -P -- "$1"; }
 
 # Git shorthand
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
