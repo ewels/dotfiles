@@ -37,7 +37,7 @@ alias gl="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(y
 alias gs='git status -sb' # Succinct git status
 alias gb="git checkout -b " # Checkout a new branch
 alias gbranch="git checkout -b " # Checkout a new branch
-alias gclean="git branch --merged | egrep -v \"(^\*|master|dev|TEMPLATE)\" | xargs git branch -d" # Clean local merged branches
+alias gclean="git branch --merged | egrep -v \"(^\*|master|dev|TEMPLATE)\" | xargs git branch -d && git fetch origin --prune" # Clean local merged branches
 function gupdate(){
   local upstream_branch="${1:dev}"
   git pull
