@@ -38,6 +38,13 @@ alias gs='git status -sb' # Succinct git status
 alias gb="git checkout -b " # Checkout a new branch
 alias gbranch="git checkout -b " # Checkout a new branch
 alias gclean="git branch --merged | egrep -v \"(^\*|master|dev|TEMPLATE)\" | xargs git branch -d" # Clean local merged branches
+function gupdate(){
+  local upstream_branch="${1:dev}"
+  git pull
+  git pull upstream "$upstream_branch"
+  git push
+  gclean
+}
 
 # brew install git bash-completion
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
