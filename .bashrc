@@ -44,6 +44,7 @@ function gupdate(){
   git pull upstream "$upstream_branch"
   git push
   gclean
+  git fetch upstream --prune
 }
 
 # brew install git bash-completion
