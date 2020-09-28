@@ -70,51 +70,34 @@ export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
 
-#################
-## Command prompt, eg:
-#   (conda_env)  ~/somedir/.../current_dir (branch) »
-# Coloured, final » is green or red depending if git status is dirty or not
-# Originally based on Git stuff from Guillermo - @guillermo-carrasco
-# Added to quite a bit over the years
-#
-
-function parse_git_dirty {
-  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
-}
-function parse_git_branch () {
-  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-}
-RED="\[\033[0;31m\]"
-YELLOW="\[\033[0;33m\]"
-GREEN="\[\033[0;32m\]"
-NO_COLOUR="\[\033[0m\]"
-
-export MYPS='$(echo -n "${PWD/#$HOME/~}" | awk -F "/" '"'"'{
-if (length($0) > 14) { if (NF>4) print $1 "/" $2 "/.../" $(NF-1) "/" $NF;
-else if (NF>3) print $1 "/" $2 "/.../" $NF;
-else print $1 "/.../" $NF; }
-else print $0;}'"'"')'
-
+## Command prompt coloured by git status
 function prompt_if_git_dirty(){
+  PROMPT=" ❯"
   if STATUS=$(git status -s 2> /dev/null); then
     if [[ -z $STATUS ]] ; then
-      echo -en "\x01\033[0;32m\x02» \x01\033[0m\x02"
+      # Git is clean - green prompt
+      echo -en "\x01\033[0;32m\x02$PROMPT \x01\033[0m\x02"
     else
-      echo -en "\x01\033[0;31m\x02» \x01\033[0m\x02"
+      # Git is dirty - red prompt
+      echo -en "\x01\033[0;31m\x02$PROMPT \x01\033[0m\x02"
     fi
   else
-    echo -en "» "
+    # Not a git repo - yellow prompt
+    echo -en "\x01\033[0;33m\x02$PROMPT \x01\033[0m\x02"
   fi
 }
-
-PS1=" $GREEN$MYPS$YELLOW\$(parse_git_branch)$NO_COLOUR \$(prompt_if_git_dirty)$NO_COLOUR"
+PS1="\$(prompt_if_git_dirty)"
 
 
 # iTerm function to get current conda environment
-# Doesn't work??
+# Specify as \(user.condaEnv) in an iTerm2 "Interpolated string" status bar component
 function iterm2_print_user_vars() {
   iterm2_set_user_var condaEnv $CONDA_DEFAULT_ENV
 }
+# To remove the conda environment name prefix:
+#   conda config --set env_prompt ''
+# To remove iTerm2 shell integration blue arrow:
+#   Preferences > Profiles > (your profile) > Terminal > Shell Integration > Turn off "Show mark indicators"
 
 # Ruby renv packaging
 eval "$(rbenv init -)"
