@@ -104,7 +104,9 @@ function iterm2_print_user_vars() {
 #   Preferences > Profiles > (your profile) > Terminal > Shell Integration > Turn off "Show mark indicators"
 
 # Ruby renv packaging
-eval "$(rbenv init -)"
+if type "rbenv" > /dev/null 2>&1; then
+  eval "$(rbenv init -)"
+fi
 
 # Homebrew installation of ruby / other stuff
 export PATH=/usr/local/bin:$PATH
