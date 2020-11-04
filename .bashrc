@@ -69,6 +69,10 @@ export BETTER_EXCEPTIONS=1
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
+# Grep options
+export GREP_OPTIONS='--color'
+export GREP_COLOR='1;31' # green for matches
+
 
 ## Command prompt coloured by git status
 function prompt_if_git_dirty(){
