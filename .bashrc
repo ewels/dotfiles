@@ -55,6 +55,9 @@ function gupdate(){
 alias mv='mv -i'
 alias cp='cp -i'
 
+# Stop OSX telling me to use zsh
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
 # Bash history stuff
 export HISTCONTROL=ignoreboth
 export HISTFILESIZE=10000000
