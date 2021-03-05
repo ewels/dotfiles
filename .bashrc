@@ -38,6 +38,8 @@ alias gs='git status -sb' # Succinct git status
 alias gb="git checkout -b " # Checkout a new branch
 alias gbranch="git checkout -b " # Checkout a new branch
 alias gclean="git branch --merged | egrep -v \"(^\*|master|dev|TEMPLATE)\" | xargs git branch -d && git fetch origin --prune" # Clean local merged branches
+
+# Helper function to pull + push updates from fork and upstream and clean old branches
 function gupdate(){
   local upstream_branch="${1:dev}"
   git pull
@@ -45,6 +47,16 @@ function gupdate(){
   git push
   gclean
   git fetch upstream --prune
+}
+
+# Helper function to list all PRs for a repo using gh cli, but list additions, deletions and files changed
+# Requires: https://cli.github.com/ and https://stedolan.github.io/jq/
+function ghprs(){
+  echo -e "PR\t+\t-\tFiles"
+  for pr in $(gh api repos/:owner/:repo/pulls | jq .[].number); do
+    gh api repos/:owner/:repo/pulls/${pr} | jq .number,.additions,.deletions,.changed_files | tr '\n' \\t
+    echo ""
+  done
 }
 
 # brew install git bash-completion
