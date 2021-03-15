@@ -62,6 +62,10 @@ function ghprs(){
 # brew install git bash-completion
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
+# Use delta instead of diff - brew install delta
+# https://github.com/dandavison/delta
+alias diff="delta -s"
+
 # Safety
 # alias rm="rm -i"
 alias mv='mv -i'
