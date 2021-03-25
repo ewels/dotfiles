@@ -40,7 +40,9 @@ alias gbranch="git checkout -b " # Checkout a new branch
 alias gclean="git branch --merged | egrep -v \"(^\*|master|dev|TEMPLATE)\" | xargs git branch -d && git fetch origin --prune" # Clean local merged branches
 
 # Run bash history through fuzzy finder (fzf) - https://github.com/junegunn/fzf
-alias h="eval $(history -w /dev/stdout | fzf)"
+function h(){
+  eval $(history -w /dev/stdout | fzf)
+}
 
 # Helper function to pull + push updates from fork and upstream and clean old branches
 function gupdate(){
