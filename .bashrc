@@ -114,7 +114,7 @@ function prompt_if_git_dirty(){
     echo -en "\x01\033[0;33m\x02$PROMPT \x01\033[0m\x02"
   fi
 }
-PS1="\$(prompt_if_git_dirty)"
+PS1="\[\033[0;34m\]$SHELLNAME\[\033[0m\]\$(prompt_if_git_dirty)"
 
 
 # iTerm function to get current conda environment
