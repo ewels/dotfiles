@@ -11,7 +11,7 @@
 #
 
 
-# Basic Function Aliases
+# Basic Functioyn Aliases
 alias ls='ls -p' # Adds slash after directory names
 alias ll='ls -lhtr' # Human readable filesizes by edit time
 alias lsd='ls -l | grep ^d' # List directories only
@@ -20,7 +20,7 @@ alias du='du -kh' # Human readable directory filesizes
 alias df='df -kTh' # Human readable drive sizes
 alias untar='tar -xvzf' # Easy untar
 alias dos2unix="perl -pe 's/\r\n|\n|\r/\n/g'" # Convert line endings
-alias docker_delete_all='docker rm $(docker ps -a -q) && docker rmi -f $(docker images -q)' # Delete all local Docker images
+alias docker_delete_all='docker rm $(docker ps -a -q) && docker rmi -f $(docker images -q); docker volume prune -f' # Delete all local Docker images
 alias cat='bat --theme TwoDark' # Use the awesome `bat` instead of `cat`. Requires `brew install bat`
 alias firefox='open -a /Applications/Firefox.app'
 alias chrome='open -a "/Applications/Google Chrome.app" '
