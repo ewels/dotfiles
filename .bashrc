@@ -57,9 +57,9 @@ function gupdate(){
 # Helper function to list all PRs for a repo using gh cli, but list additions, deletions and files changed
 # Requires: https://cli.github.com/ and https://stedolan.github.io/jq/
 function ghprs(){
-  echo -e "PR\t+\t-\tFiles"
+  echo -e "PR\t+\t-\tFiles\tTitle"
   for pr in $(gh api repos/:owner/:repo/pulls | jq .[].number); do
-    gh api repos/:owner/:repo/pulls/${pr} | jq .number,.additions,.deletions,.changed_files | tr '\n' \\t
+    gh api repos/:owner/:repo/pulls/${pr} | jq .number,.additions,.deletions,.changed_files,.title | tr '\n' \\t
     echo ""
   done
 }
