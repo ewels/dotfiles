@@ -1,2 +1,2 @@
 # Backwards-compatible file after renaming
-source setup.sh
+source "${BASH_SOURCE%/*}/setup.sh"
