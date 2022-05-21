@@ -2,56 +2,55 @@
 # =============================================================================
 # Generic bash helper functions / customisation
 # Kinda messy, mostly used for personal backup and sharing between machines
-# Use at your own risk!
+# Based on top of zsh / oh-my-zsh. Use at your own risk!
 # Phil Ewels - @ewels
 # =============================================================================
 #
 # Recommendation: Keep this git repo somewhere sensible and then just
-# source this file in your home directory .bashrc / .bash_profile
+# source this file in your ~/.zshrc
 #
 
+# Remember oh-my-zsh has a bunch of nice commands already
+# Cheatsheet: https://github.com/ohmyzsh/ohmyzsh/wiki/Cheatsheet#directory
+# My favourites:
+# ------------------------------
+# md : make directory
+# rd : remove directory
+# mkcd : mkdir and cd to it
+# .. / ... etc : move up directories
+# - : cd to the last directory
+# d : List recent directories, then: 0-9 (as command) to go to directory with that index
+# ------------------------------
 
 # Basic Functioyn Aliases
 alias ls='ls -p' # Adds slash after directory names
-alias ll='ls -lhtr' # Human readable filesizes by edit time
-alias lsd='ls -l | grep ^d' # List directories only
-alias lol="ll | lolcat" # Taste the rainbow. Requires `pip install lolcat`
-alias du='du -kh' # Human readable directory filesizes
-alias df='df -kTh' # Human readable drive sizes
+alias lsd='ls -d */' # List directories only
+alias lol="ll | lolcat" # Taste the rainbow. pip install lolcat
+alias du='du -sh ./* ./.*' # Disk usage with human readable units, including hidden flies and not recursive (zsh)
 alias untar='tar -xvzf' # Easy untar
 alias dos2unix="perl -pe 's/\r\n|\n|\r/\n/g'" # Convert line endings
 alias docker_delete_all='docker rm $(docker ps -a -q) && docker rmi -f $(docker images -q); docker volume prune -f' # Delete all local Docker images
 alias cat='bat --theme TwoDark' # Use the awesome `bat` instead of `cat`. Requires `brew install bat`
-alias firefox='open -a /Applications/Firefox.app'
-alias chrome='open -a "/Applications/Google Chrome.app" '
-alias seqmonk='open -n -a seqmonk'
-alias typora='open -a typora'
-alias cd..='cd ../'
-alias ..='cd ../'
-alias ...='cd ../../'
-alias ....='cd ../../../'
-mkcd (){ mkdir -p -- "$1" && cd -P -- "$1"; }
 
 # Git shorthand
+# oh-my-zsh has a git plugin with similar but different shortcuts, remember to remove that
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 alias gs='git status -sb' # Succinct git status
 alias gb="git checkout -b " # Checkout a new branch
 alias gbranch="git checkout -b " # Checkout a new branch
-alias gclean="git branch --merged | egrep -v \"(^\*|master|dev|TEMPLATE)\" | xargs git branch -d && git fetch origin --prune" # Clean local merged branches
-
-# Run bash history through fuzzy finder (fzf) - https://github.com/junegunn/fzf
-function h(){
-  eval $(history -w /dev/stdout | fzf)
-}
+alias gclean="git branch --merged | egrep -v \"(^\*|master|dev|TEMPLATE)\" | xargs git branch -d; git fetch  --all --prune" # Clean local merged branches
 
 # Helper function to pull + push updates from fork and upstream and clean old branches
 function gupdate(){
   local upstream_branch="${1:dev}"
+  local remote_name="origin"
+  if git ls-remote --exit-code upstream; then
+    remote_name="upstream"
+  fi
   git pull
-  git pull upstream "$upstream_branch"
+  git pull $remote_name "$upstream_branch"
   git push
   gclean
-  git fetch upstream --prune
 }
 
 # Helper function to list all PRs for a repo using gh cli, but list additions, deletions and files changed
@@ -64,43 +63,22 @@ function ghprs(){
   done
 }
 
-# brew install git bash-completion
-[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
-
 # Use delta instead of diff - brew install delta
-# https://github.com/dandavison/delta
-alias diff="delta -s"
+# https://github.com/dandavison/delta - `brew install git-delta`
+alias diff="delta -s --syntax-theme TwoDark"
 
 # Safety
 # alias rm="rm -i"
 alias mv='mv -i'
 alias cp='cp -i'
 
-# Stop OSX telling me to use zsh
-export BASH_SILENCE_DEPRECATION_WARNING=1
-
-# Bash history stuff
-export HISTCONTROL=ignoreboth
-export HISTFILESIZE=10000000
-export HISTSIZE=10000000
-export HISTIGNORE='&:ls:l:la:ll:exit'
-
-# Nice Python exception traces
-# https://github.com/Qix-/better-exceptions
-export BETTER_EXCEPTIONS=1
-
 # Nice colours in the terminal for OSX
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
-# Grep options
-export GREP_OPTIONS='--color'
-export GREP_COLOR='1;31' # green for matches
-
-
 ## Command prompt coloured by git status
 function prompt_if_git_dirty(){
-  PROMPT=" ❯"
+  PROMPT="❯"
   if STATUS=$(git status -s 2> /dev/null); then
     if [[ -z $STATUS ]] ; then
       # Git is clean - green prompt
@@ -114,7 +92,7 @@ function prompt_if_git_dirty(){
     echo -en "\x01\033[0;33m\x02$PROMPT \x01\033[0m\x02"
   fi
 }
-PS1="\[\033[0;34m\]$SHELLNAME\[\033[0m\]\$(prompt_if_git_dirty)"
+PS1=$(prompt_if_git_dirty)
 
 
 # iTerm function to get current conda environment
@@ -131,22 +109,6 @@ function iterm2_print_user_vars() {
 if type "rbenv" > /dev/null 2>&1; then
   eval "$(rbenv init -)"
 fi
-
-# Homebrew installation of ruby / other stuff
-export PATH=/usr/local/bin:$PATH
-
-# Homebrew shell auto-completion
-if type brew &>/dev/null; then
-  HOMEBREW_PREFIX="$(brew --prefix)"
-  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
-    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
-  else
-    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
-      [[ -r "$COMPLETION" ]] && source "$COMPLETION"
-    done
-  fi
-fi
-
 
 # One command to extract them all
 extract () {
@@ -174,7 +136,3 @@ extract () {
     echo "'$1' is not a valid file"
   fi
 }
-
-
-# From iTerm for remote shell integration
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
