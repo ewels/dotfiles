@@ -82,17 +82,18 @@ function prompt_if_git_dirty(){
   if STATUS=$(git status -s 2> /dev/null); then
     if [[ -z $STATUS ]] ; then
       # Git is clean - green prompt
-      echo -en "\x01\033[0;32m\x02$PROMPT \x01\033[0m\x02"
+      echo -en "$fg[green]$PROMPT $fg[default]"
     else
       # Git is dirty - red prompt
-      echo -en "\x01\033[0;31m\x02$PROMPT \x01\033[0m\x02"
+      echo -en "$fg[red]$PROMPT $fg[default]"
     fi
   else
     # Not a git repo - yellow prompt
-    echo -en "\x01\033[0;33m\x02$PROMPT \x01\033[0m\x02"
+    echo -en "$fg[yellow]$PROMPT $fg[default]"
   fi
 }
-PS1=$(prompt_if_git_dirty)
+setopt PROMPT_SUBST # zsh prompt expansion
+PS1='$(prompt_if_git_dirty)'
 
 
 # iTerm function to get current conda environment
