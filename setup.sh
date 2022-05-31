@@ -54,14 +54,13 @@ function gupdate(){
 }
 
 # Helper function to list all PRs for a repo using gh cli, but list additions, deletions and files changed
-# Requires: https://cli.github.com/ and https://stedolan.github.io/jq/
-function ghprs(){
-  echo -e "PR\t+\t-\tFiles\tTitle"
-  for pr in $(gh api repos/:owner/:repo/pulls | jq .[].number); do
-    gh api repos/:owner/:repo/pulls/${pr} | jq .number,.additions,.deletions,.changed_files,.title | tr '\n' \\t
-    echo ""
-  done
-}
+# Requires: https://cli.github.com/
+alias ghprs=$'gh pr list --json number,additions,deletions,changedFiles,title --jq \'["PR", "+", "-", "Files", "Title"], (.[]|[.number,.additions,.deletions,.changedFiles,.title])|@tsv\' | rich - --csv'
+
+# If you prefer, you can use a gh alias:
+# gh alias set --shell prs $'gh pr list --json number,additions,deletions,changedFiles,title --jq \'["PR", "+", "-", "Files", "Title"], (.[]|[.number,.additions,.deletions,.changedFiles,.title])|@tsv\' | rich - --csv'
+# Usage: gh prs
+
 
 # Use delta instead of diff - brew install delta
 # https://github.com/dandavison/delta - `brew install git-delta`
