@@ -54,7 +54,7 @@ function gupdate(){
 }
 
 # Helper function to list all PRs for a repo using gh cli, but list additions, deletions and files changed
-# Requires: https://cli.github.com/
+# Requires: https://cli.github.com/ and https://github.com/Textualize/rich-cli
 alias ghprs=$'gh pr list --json number,additions,deletions,changedFiles,title --jq \'["PR", "+", "-", "Files", "Title"], (.[]|[.number,.additions,.deletions,.changedFiles,.title])|@tsv\' | rich - --csv'
 
 # If you prefer, you can use a gh alias:
