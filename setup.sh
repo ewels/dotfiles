@@ -42,7 +42,7 @@ alias gclean="git branch --merged | egrep -v \"(^\*|master|dev|TEMPLATE)\" | xar
 
 # Helper function to pull + push updates from fork and upstream and clean old branches
 function gupdate(){
-  local upstream_branch="${1:dev}"
+  local upstream_branch="${1:-dev}"
   local remote_name="origin"
   if git ls-remote --exit-code upstream; then
     remote_name="upstream"
