@@ -38,15 +38,16 @@ alias gl="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(y
 alias gs='git status -sb' # Succinct git status
 alias gb="git checkout -b " # Checkout a new branch
 alias gbranch="git checkout -b " # Checkout a new branch
-alias gclean="git branch --merged | egrep -v \"(^\*|master|dev|TEMPLATE)\" | xargs git branch -d; git fetch  --all --prune" # Clean local merged branches
+alias gclean="git branch --merged | egrep -v \"(^\*|master|dev|TEMPLATE)\" | xargs git branch -d; git fetch --all --prune" # Clean local merged branches
 
 # Helper function to pull + push updates from fork and upstream and clean old branches
 function gupdate(){
   local upstream_branch="${1:-dev}"
   local remote_name="origin"
-  if git ls-remote --exit-code upstream; then
+  if git remote | grep -q 'upstream'; then
     remote_name="upstream"
   fi
+  echo "Pulling updates from $fg[green]origin/$(git branch --show-current)$fg[default] and $fg[green]${remote_name}/${upstream_branch}$fg[default]"
   git pull
   git pull $remote_name "$upstream_branch"
   git push
