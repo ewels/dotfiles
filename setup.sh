@@ -22,6 +22,10 @@
 # d : List recent directories, then: 0-9 (as command) to go to directory with that index
 # ------------------------------
 
+# Turn off some zsh stuff
+setopt no_share_history
+unsetopt share_history
+
 # Basic Functioyn Aliases
 alias ls='ls -p' # Adds slash after directory names
 alias lsd='ls -d */' # List directories only
