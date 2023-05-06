@@ -43,6 +43,7 @@ alias gs='git status -sb' # Succinct git status
 alias gb="git checkout -b " # Checkout a new branch
 alias gbranch="git checkout -b " # Checkout a new branch
 alias gclean="git branch --merged | egrep -v \"(^\*|master|dev|TEMPLATE)\" | xargs git branch -d; git fetch --all --prune" # Clean local merged branches
+# gh alias set start 'gh issue view $1 | head -n 1 | cut -c8- | tr "[:upper:]" "[:lower:]" | sed "s/ /-/g" | (echo -n $1- && cat) | xargs git checkout -b' --shell
 
 # Helper function to pull + push updates from fork and upstream and clean old branches
 function gupdate(){
