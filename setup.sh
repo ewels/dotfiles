@@ -45,7 +45,7 @@ alias gbranch="git checkout -b " # Checkout a new branch
 # https://stackoverflow.com/a/56026209/713980
 alias gprunesquashmergedmaster='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse "$branch^{tree}") -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
 alias gprunesquashmergedmain='git checkout -q main && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base main $branch) && [[ $(git cherry main $(git commit-tree $(git rev-parse "$branch^{tree}") -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
-alias gclean="gprunesquashmerged; gprunesquashmergedmain; git branch --merged | egrep -v \"(^\*|master|dev|TEMPLATE|main)\" | xargs git branch -d; git fetch --all --prune" # Clean local merged branches
+alias gclean="gprunesquashmergedmaster; gprunesquashmergedmain; git branch --merged | egrep -v \"(^\*|master|dev|TEMPLATE|main)\" | xargs git branch -d; git fetch --all --prune" # Clean local merged branches
 # gh alias set start 'gh issue view $1 | head -n 1 | cut -c8- | tr "[:upper:]" "[:lower:]" | sed "s/ /-/g" | (echo -n $1- && cat) | xargs git checkout -b' --shell
 
 # Helper function to pull + push updates from fork and upstream and clean old branches
