@@ -26,7 +26,7 @@
 setopt no_share_history
 unsetopt share_history
 
-# Basic Functioyn Aliases
+# Basic Function Aliases
 alias ls='ls -p' # Adds slash after directory names
 alias lsd='ls -d */' # List directories only
 alias lol="ll | lolcat" # Taste the rainbow. pip install lolcat
@@ -35,6 +35,7 @@ alias untar='tar -xvzf' # Easy untar
 alias dos2unix="perl -pe 's/\r\n|\n|\r/\n/g'" # Convert line endings
 alias docker_delete_all='docker rm $(docker ps -a -q); docker rmi -f $(docker images -q); docker volume prune -f' # Delete all local Docker images
 alias cat='bat --theme TwoDark' # Use the awesome `bat` instead of `cat`. Requires `brew install bat`
+alias pip='uv pip' # Use the ridiculously fast `uv` instead of `pip` - https://github.com/astral-sh/uv
 
 # Git shorthand
 # oh-my-zsh has a git plugin with similar but different shortcuts, remember to remove that
