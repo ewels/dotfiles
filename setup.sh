@@ -36,6 +36,7 @@ alias dos2unix="perl -pe 's/\r\n|\n|\r/\n/g'" # Convert line endings
 alias docker_delete_all='docker rm $(docker ps -a -q); docker rmi -f $(docker images -q); docker volume prune -f; docker system prune --volumes -a -f' # Delete all local Docker images
 alias cat='bat --theme TwoDark' # Use the awesome `bat` instead of `cat`. Requires `brew install bat`
 # alias pip='uv pip' # Use the ridiculously fast `uv` instead of `pip` - https://github.com/astral-sh/uv
+alias nt='open . -a iterm' # Open a new terminal tab at the same location
 
 # Git shorthand
 # oh-my-zsh has a git plugin with similar but different shortcuts, remember to remove that
