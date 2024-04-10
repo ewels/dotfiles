@@ -33,7 +33,7 @@ alias lol="ll | lolcat" # Taste the rainbow. pip install lolcat
 alias duh='du -sh ./* ./.*' # Disk usage with human readable units, including hidden flies and not recursive (zsh)
 alias untar='tar -xvzf' # Easy untar
 alias dos2unix="perl -pe 's/\r\n|\n|\r/\n/g'" # Convert line endings
-alias docker_delete_all='docker rm $(docker ps -a -q); docker rmi -f $(docker images -q); docker volume prune -f' # Delete all local Docker images
+alias docker_delete_all='docker rm $(docker ps -a -q); docker rmi -f $(docker images -q); docker volume prune -f; docker system prune --volumes -a -f' # Delete all local Docker images
 alias cat='bat --theme TwoDark' # Use the awesome `bat` instead of `cat`. Requires `brew install bat`
 alias pip='uv pip' # Use the ridiculously fast `uv` instead of `pip` - https://github.com/astral-sh/uv
 
