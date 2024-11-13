@@ -75,7 +75,7 @@ alias ghprs=$'gh pr list --json number,additions,deletions,changedFiles,title --
 
 # Use delta instead of diff - brew install delta
 # https://github.com/dandavison/delta - `brew install git-delta`
-alias diff="delta -s --syntax-theme TwoDark"
+# alias diff="delta -s --syntax-theme TwoDark"
 
 # Safety
 # alias rm="rm -i"
