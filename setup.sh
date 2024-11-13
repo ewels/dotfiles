@@ -72,6 +72,27 @@ alias ghprs=$'gh pr list --json number,additions,deletions,changedFiles,title --
 # gh alias set --shell prs $'gh pr list --json number,additions,deletions,changedFiles,title --jq \'["PR", "+", "-", "Files", "Title"], (.[]|[.number,.additions,.deletions,.changedFiles,.title])|@tsv\' | rich - --csv'
 # Usage: gh prs
 
+# Function to use 'gptme' to generate git commit messages
+function gc(){
+  if git diff --cached --quiet; then
+    gum style --margin "0 1"  --foreground 1 "No staged changes found - use 'git add'"
+    return 1
+  fi
+  msg_file=$(mktemp)
+  gum style --margin "0 1"  --foreground 212 "Generating commit message"
+  git diff --cached | gptme --non-interactive --no-stream "Make a temporary file. Write a concise, meaningful commit message for this diff to '$msg_file'.
+
+Format: <type>: <subject>
+Where type is one of: feat, fix, docs, style, refactor, test, chore, build" &> /dev/null
+
+  gum style --border normal --padding "0 1" --border-foreground 57 --width 80 "$(cat $msg_file)"
+  if gum confirm "Commit with this message?"; then
+    git commit -F "$msg_file"
+  else
+    return 1
+  fi
+}
+
 
 # Use delta instead of diff - brew install delta
 # https://github.com/dandavison/delta - `brew install git-delta`
