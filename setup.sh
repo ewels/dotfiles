@@ -72,7 +72,9 @@ alias ghprs=$'gh pr list --json number,additions,deletions,changedFiles,title --
 # gh alias set --shell prs $'gh pr list --json number,additions,deletions,changedFiles,title --jq \'["PR", "+", "-", "Files", "Title"], (.[]|[.number,.additions,.deletions,.changedFiles,.title])|@tsv\' | rich - --csv'
 # Usage: gh prs
 
-# Function to use 'gptme' to generate git commit messages
+# Function to use 'gptme' to generate git commit messages. Requires charmbracelet/gum
+# https://gptme.org/
+# https://github.com/charmbracelet/gum?tab=readme-ov-file#installation
 function gc(){
   if git diff --cached --quiet; then
     gum style --margin "0 1"  --foreground 1 "No staged changes found - use 'git add'"
