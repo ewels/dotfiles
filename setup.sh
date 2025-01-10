@@ -144,6 +144,9 @@ if type "rbenv" > /dev/null 2>&1; then
   eval "$(rbenv init -)"
 fi
 
+# Atuin, but don't mess with the up key (Bind ctrl-r but not up arrow)
+eval "$(atuin init zsh --disable-up-arrow)"
+
 # One command to extract them all
 extract () {
   if [ $# -ne 1 ]
