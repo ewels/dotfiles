@@ -43,6 +43,7 @@ alias nt='open . -a iterm' # Open a new terminal tab at the same location
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 alias gs='git status -sb' # Succinct git status
 alias gb="git checkout -b " # Checkout a new branch
+alias gd="git diff ':(exclude)**/compiled/**' " # Diff without compiled files (MQC)
 alias gbranch="git checkout -b " # Checkout a new branch
 # https://stackoverflow.com/a/56026209/713980
 alias gprunesquashmergedmaster='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse "$branch^{tree}") -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
@@ -138,14 +139,6 @@ function iterm2_print_user_vars() {
 #   conda config --set env_prompt ''
 # To remove iTerm2 shell integration blue arrow:
 #   Preferences > Profiles > (your profile) > Terminal > Shell Integration > Turn off "Show mark indicators"
-
-# Ruby renv packaging
-if type "rbenv" > /dev/null 2>&1; then
-  eval "$(rbenv init -)"
-fi
-
-# Atuin, but don't mess with the up key (Bind ctrl-r but not up arrow)
-eval "$(atuin init zsh --disable-up-arrow)"
 
 # One command to extract them all
 extract () {
