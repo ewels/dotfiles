@@ -140,6 +140,16 @@ function iterm2_print_user_vars() {
 # To remove iTerm2 shell integration blue arrow:
 #   Preferences > Profiles > (your profile) > Terminal > Shell Integration > Turn off "Show mark indicators"
 
+# Automatically start Colima if no docker daemon running already
+docker() {
+  if ! command colima status &>/dev/null; then
+    echo "No docker daemon running yet, starting colima..." >&2
+    command colima start || return 1
+    echo "Started, now running original docker command..." >&2
+  fi
+  command docker "$@"
+}
+
 # One command to extract them all
 extract () {
   if [ $# -ne 1 ]
