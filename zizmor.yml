@@ -1,0 +1,19 @@
+# Personal zizmor (https://docs.zizmor.sh/) config, loaded globally via
+# ZIZMOR_CONFIG in setup.sh. Not (yet) committed to CI in any repo, so this
+# is the only place these policies are applied - if a repo later gets its
+# own .github/zizmor.yml, that repo-local file takes over completely and
+# this one is ignored for it (zizmor doesn't merge global + local config).
+#
+# Policy: actions under orgs I write/control (nextflow-io, seqeralabs,
+# nf-core) only need to be pinned to a major-version tag, not a full SHA -
+# a moving tag there lets a fix ship once and reach every consumer
+# immediately, instead of needing a PR against every repo that uses it.
+# Everything else still needs hash-pinning (zizmor's default).
+rules:
+  unpinned-uses:
+    config:
+      policies:
+        nextflow-io/*: ref-pin
+        seqeralabs/*: ref-pin
+        nf-core/*: ref-pin
+        "*": hash-pin

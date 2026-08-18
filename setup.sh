@@ -110,6 +110,12 @@ alias cp='cp -i'
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
+# zizmor (GitHub Actions security linter) - personal policy applied to every repo.
+# See zizmor.yml in this same dotfiles repo for what it does and why.
+# NB: this is exclusive with any repo-local .github/zizmor.yml - whichever repo
+# has its own config uses that instead and this one is ignored for it.
+export ZIZMOR_CONFIG="$HOME/GitHub/ewels/dotfiles/zizmor.yml"
+
 ## Command prompt coloured by git status
 function prompt_if_git_dirty(){
   PROMPT="❯"
