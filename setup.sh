@@ -116,6 +116,19 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 # has its own config uses that instead and this one is ignored for it.
 export ZIZMOR_CONFIG="$HOME/GitHub/ewels/dotfiles/zizmor.yml"
 
+# Bump all GitHub Actions in a repo with https://github.com/azat-io/actions-up
+# Externally-authored actions get pinned to a commit SHA (max security).
+# Actions from orgs we control ourselves (nf-core, seqeralabs, nextflow-io) are
+# left on a floating major-version tag instead (no SHA), so we can ship fixes
+# without touching every pipeline.
+function ghactionsup(){
+  echo "Pinning external actions to SHA..."
+  npx actions-up -y --style sha --exclude "^nf-core/" --exclude "^seqeralabs/" --exclude "^nextflow-io/" || return 1
+
+  echo "Pinning nf-core/seqeralabs/nextflow-io actions to major version tag only (no SHA)..."
+  npx actions-up -y --style semver --exclude "^(?!nf-core/|seqeralabs/|nextflow-io/)" || return 1
+}
+
 ## Command prompt coloured by git status
 function prompt_if_git_dirty(){
   PROMPT="❯"
