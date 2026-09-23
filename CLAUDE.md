@@ -21,6 +21,11 @@ If no `CLAUDE.md` file is found in the root of the repo, check if there is a roo
 - Avoid referencing sub-tasks within reviews and issues with a hash symbol (`#2`, `#6` etc), only use this notation for referencing GitHub issue and PR numbers.
 - The GitHub CLI can now attach files to issues/PRs with `--attach`. Use a local path in the markdown then `--attach` with the same path.
 
+# Jira
+
+- NEVER create Jira tickets (issues, tasks, sub-tasks, epics) unless I explicitly ask for one in that message. This applies to subagents too: pass the rule on in every subagent prompt that could touch Jira. A review or triage recommending "file a ticket" is not permission; surface the suggestion to me instead.
+- Reading and searching Jira is fine.
+
 ## Code Comments
 
 - Default to no comment. Code shows *how*; comment only to carry *why* — a non-obvious constraint, deliberate deviation, gotcha, or workaround.
