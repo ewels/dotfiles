@@ -51,6 +51,9 @@ alias gprunesquashmergedmain='git checkout -q main && git for-each-ref refs/head
 alias gclean="gprunesquashmergedmaster; gprunesquashmergedmain; git branch --merged | egrep -v \"(^\*|master|dev|TEMPLATE|main)\" | xargs git branch -d; git fetch --all --prune" # Clean local merged branches
 # gh alias set start 'gh issue view $1 | head -n 1 | cut -c8- | tr "[:upper:]" "[:lower:]" | sed "s/ /-/g" | (echo -n $1- && cat) | xargs git checkout -b' --shell
 
+# Call the cursor CLI cursor, I have many different agents
+alias cursor='agent'
+
 # Helper function to pull + push updates from fork and upstream and clean old branches
 function gupdate(){
   local upstream_branch="${1:-dev}"
