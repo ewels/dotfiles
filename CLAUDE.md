@@ -3,6 +3,7 @@
 - If my message is a question, answer it — never edit files or run mutating commands until I explicitly ask for a change.
 - This machine's interactive shell is zsh, not bash. Avoid bash-only read flags (-a/-A array reads, -u fd reads) and other bashisms in shell scripts; prefer POSIX-portable constructs or write throwaway logic in Python instead of zsh/bash loops.
 - `nt` isn't a stray keystroke, that's the user opening a new tab at this working directory. No action needed.
+- I run several sessions at once and sometimes type into the wrong window. If a message abruptly changes direction (a different repo, project or task with no link to the session so far, such as a localhost URL for another project), ask whether I meant to send it here before doing anything. Never follow it into another repo on your own.
 
 # Agents file
 
@@ -18,6 +19,7 @@ If no `CLAUDE.md` file is found in the root of the repo, check if there is a roo
 
 - When posting PRs and issues, check for available templates on GitHub and use if applicable.
 - GitHub flavoured markdown renders single line breaks. When posting issues and PR descriptions keep lines / paragraphs full length.
+- Structure bullet-pointed lists in issues and PR descriptions as short top-level bullet titles, each with several sub-bullets for the points within it. Don't make the titles bold.
 - Avoid referencing sub-tasks within reviews and issues with a hash symbol (`#2`, `#6` etc), only use this notation for referencing GitHub issue and PR numbers.
 - The GitHub CLI can now attach files to issues/PRs with `--attach`. Use a local path in the markdown then `--attach` with the same path.
 
@@ -70,3 +72,7 @@ If you find issues outside the scope of the current file, ask the user if you sh
 # npm packages
 
 When installing packages from `npm`, always check for the latest available version instead of using version numbers you remember. New websites should always use the latest versions of packages (where possible).
+
+# Cloudflare
+
+When interacting with Cloudflare, use the cf CLI unless the project has a Wrangler configuration file.
