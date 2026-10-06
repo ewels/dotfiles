@@ -1,0 +1,6 @@
+{
+  "name": "dev-servers",
+  "version": "0.1.0",
+  "description": "A pane listing local dev servers with Open, Restart and Stop; stops the ones this session started on exit",
+  "types": "./types/index.d.ts"
+}

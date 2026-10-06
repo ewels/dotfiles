@@ -1,0 +1,5 @@
+{
+  "name": "git-line",
+  "version": "0.1.0",
+  "description": "Status line with branch, ahead/behind, changed files, PR and worktree count"
+}

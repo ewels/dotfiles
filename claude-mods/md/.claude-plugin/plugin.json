@@ -1,0 +1,6 @@
+{
+  "name": "md",
+  "version": "0.1.0",
+  "description": "/md <file> opens a pane with the markdown file rendered by rich-cli",
+  "types": "./types/index.d.ts"
+}

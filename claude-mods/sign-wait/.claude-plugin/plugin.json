@@ -1,0 +1,6 @@
+{
+  "name": "sign-wait",
+  "version": "0.1.0",
+  "description": "Notifies you when 1Password blocks a git commit or push, with a one-press retry",
+  "types": "./types/index.d.ts"
+}

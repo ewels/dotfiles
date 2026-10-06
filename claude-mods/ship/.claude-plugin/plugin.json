@@ -1,0 +1,6 @@
+{
+  "name": "ship",
+  "version": "0.1.0",
+  "description": "A band above the prompt with Commit / Push / Open PR buttons when the repo has unshipped work",
+  "types": "./types/index.d.ts"
+}

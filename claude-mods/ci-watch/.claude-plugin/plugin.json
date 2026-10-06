@@ -1,0 +1,6 @@
+{
+  "name": "ci-watch",
+  "version": "0.1.0",
+  "description": "Watches GitHub Actions after every git push; status line, toast, and a Fix it button on failure",
+  "types": "./types/index.d.ts"
+}
