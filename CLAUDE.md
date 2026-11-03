@@ -76,3 +76,7 @@ When installing packages from `npm`, always check for the latest available versi
 # Cloudflare
 
 When interacting with Cloudflare, use the cf CLI unless the project has a Wrangler configuration file.
+
+# Private instructions
+
+Instructions too private for this public repo go in `~/.claude/rules/private.md` (not version-controlled). Add new private instructions there, not here.
